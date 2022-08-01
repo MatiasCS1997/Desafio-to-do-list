@@ -1,13 +1,27 @@
 const inputTarea = document.querySelector("#tareaInput");
 const totalTareas = document.querySelector("#totalTareas");
 const tareasRealizadas = document.querySelector("#tareasRealizadas");
+const btnAgregar = document.querySelector("#btnAgregar");
 const tablaTareas = document.querySelector("#tareas");
 
 const listaTareas = [
-  { id: 1, descripcion: "Correr", estado: false },
-  { id: 2, descripcion: "Trabajar", estado: false },
-  { id: 3, descripcion: "Comer", estado: false },
+  { id: 1, descripcion: "Trabajar", estado: false },
+  { id: 2, descripcion: "Comer", estado: false },
+  { id: 3, descripcion: "Correr", estado: false },
 ];
+let idTarea = listaTareas.length;
+
+btnAgregar.addEventListener("click", () => {
+  const nuevaTarea = inputTarea.value;
+  if (nuevaTarea == "") {
+    alert("Por favor agregar una tarea");
+    return;
+  }
+  idTarea++;
+  listaTareas.push({ id: idTarea, descripcion: nuevaTarea, estado: false });
+  inputTarea.value = "";
+  resumenTareas();
+});
 function eliminarTarea(id) {
   console.log(id);
   const index = listaTareas.findIndex((tarea) => tarea.id == id);
